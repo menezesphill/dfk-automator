@@ -1,0 +1,19 @@
+{
+  "name": "dfk-automator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "enable" : "chmod +x ./prepareGroups.sh",
+    "prepare" : "./prepareGroups.sh",
+    "install": "npm install pm2 -g",
+    "start": "pm2-runtime index.js --attach"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethers": "^5.7.2",
+    "graphql-request": "^5.1.0"
+  }
+}

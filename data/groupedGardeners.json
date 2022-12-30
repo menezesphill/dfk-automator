@@ -1,0 +1,41 @@
+[
+  {
+    "group": 1,
+    "gardeners": [
+      {
+        "id": "151895",
+        "gardening": 194
+      },
+      {
+        "id": "243954",
+        "gardening": 102
+      }
+    ]
+  },
+  {
+    "group": 2,
+    "gardeners": [
+      {
+        "id": "252025",
+        "gardening": 138
+      },
+      {
+        "id": "205264",
+        "gardening": 101
+      }
+    ]
+  },
+  {
+    "group": 3,
+    "gardeners": [
+      {
+        "id": "1000000010501",
+        "gardening": 132
+      },
+      {
+        "id": "1000000105084",
+        "gardening": 17
+      }
+    ]
+  }
+]
