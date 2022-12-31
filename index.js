@@ -330,7 +330,7 @@ const login = async () => {
 }
 
 login().then( 
-    setInterval(main, 1000 * 60 * 3)
+    setInterval(main, 1000 * 60 * 1)
 )
 
 
