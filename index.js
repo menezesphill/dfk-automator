@@ -8,6 +8,7 @@ const abi = require('./abi/QuestCoreV2.2.json')
 const contractAddress = "0x8dc58d6327E1f65b18B82EDFb01A361f3AAEf624"
 const JADE_MINING_ADDR = "0x20B274262FA6da57B5Ff90498EC373c0266eF901"
 const JEWEL_USDT_GARDEN_ADDR = "0x0831f733870e847263907F32B3367De2f47CeAf0"
+const JADE_USDT_GARDEN_ADDR = "0x177D9F3A92630CB8C46F169b1F99a12A7a326c45"
 const QuestCoreV2 = new ethers.Contract(contractAddress, abi, provider)
 let wallet;
 
@@ -19,7 +20,7 @@ const main = async () => {
         console.log(`[${(new Date(Date.now())).toGMTString()}] Logged in as ${wallet.address}`)
     }
 
-    QuestCoreV2.getAccountActiveQuests("0x2B57a6d9c5aC697d6BCDCB28ADB2e660640e0bc5").then((result) => {
+    QuestCoreV2.getAccountActiveQuests(wallet.address).then((result) => {
         let quest;
         let timer;
         // check if results has an element 'questAddress' with value JADE_MINING_ADDR
@@ -336,6 +337,3 @@ const login = async () => {
 
 main()
 setInterval(main, 1000 * 60 * 1)
-
-
-
