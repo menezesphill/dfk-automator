@@ -14,6 +14,11 @@ let wallet;
 
 const main = async () => {
 
+    if ( wallet === undefined ) {
+        await login()
+        console.log(`[${(new Date(Date.now())).toGMTString()}] Logged in as ${wallet.address}`)
+    }
+
     QuestCoreV2.getAccountActiveQuests("0x2B57a6d9c5aC697d6BCDCB28ADB2e660640e0bc5").then((result) => {
         let quest;
         let timer;
@@ -329,8 +334,8 @@ const login = async () => {
     : await createWallet();
 }
 
-login().then( 
-    setInterval(main, 1000 * 60 * 1)
-)
+main()
+setInterval(main, 1000 * 60 * 1)
+
 
 
