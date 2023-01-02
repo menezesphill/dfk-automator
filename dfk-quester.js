@@ -2,13 +2,11 @@ const { ethers } = require("ethers");
 const fs = require("fs");
 const readline = require("readline");
 
-const provider = new ethers.providers.JsonRpcProvider("https://klaytn.rpc.defikingdoms.com/")
+const provider = new ethers.providers.JsonRpcProvider("https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc")
 const abi = require('./abi/QuestCoreV2.2.json')
 
-const contractAddress = "0x8dc58d6327E1f65b18B82EDFb01A361f3AAEf624"
-const JADE_MINING_ADDR = "0x20B274262FA6da57B5Ff90498EC373c0266eF901"
-const JEWEL_USDT_GARDEN_ADDR = "0x0831f733870e847263907F32B3367De2f47CeAf0"
-const JADE_USDT_GARDEN_ADDR = "0x177D9F3A92630CB8C46F169b1F99a12A7a326c45"
+const contractAddress = "0xE9AbfBC143d7cef74b5b793ec5907fa62ca53154"
+const CRYSTAL_BTC_ADDRESS = "0x706916dbC3b66d89632708CC193080ea05E0534A"
 const QuestCoreV2 = new ethers.Contract(contractAddress, abi, provider)
 let wallet;
 
@@ -26,46 +24,24 @@ const main = async () => {
         // check if results has an element 'questAddress' with value JADE_MINING_ADDR
         // if yes print 'Jade Mining Quest is active'
         // if no print 'Jade Mining Quest is not active'
-        if (result.some((quest) => quest.questAddress === JADE_MINING_ADDR)) {
-            quest = result.find((quest) => quest.questAddress === JADE_MINING_ADDR)
+        if (result.some((quest) => quest.questAddress === CRYSTAL_BTC_ADDRESS)) {
+            quest = result.find((quest) => quest.questAddress === CRYSTAL_BTC_ADDRESS)
             timer = ((quest.completeAtTime.toNumber() - Date.now() / 1000) / 60).toFixed(2)
             if (parseInt(timer) < 0) {
-                console.log(`[${(new Date(Date.now())).toGMTString()}] Jade Mining Quest ended ${parseInt(timer) * (-1)} minutes ago`)
+                console.log(`[${(new Date(Date.now())).toGMTString()}] DFK Gardening Quest ended ${parseInt(timer) * (-1)} minutes ago`)
                 completeQuest(quest.heroes[0], wallet)
             } else if (parseInt(timer) > 0) {
-                console.log(`[${(new Date(Date.now())).toGMTString()}] Jade Mining Quest: Active and ending in ${timer} minutes`)
+                console.log(`[${(new Date(Date.now())).toGMTString()}] DFK Gardening Quest: Active and ending in ${timer} minutes`)
             }
         } else {
-            console.log(`[${(new Date(Date.now())).toGMTString()}] Jade Mining Quest: Jade Mining Quest is not active`)
-            findMiners().then(
-                (miners) => {
-                    if(miners === null) {
-                        console.log(`[${(new Date(Date.now())).toGMTString()}] Jade Mining Quest: No miners ready to start a quest`)
-                        return
-                    }
-                    startQuest('Jade Mining', JADE_MINING_ADDR, wallet, 15, miners)
-                }
-            )
-        }
-
-        if (result.some((quest) => quest.questAddress === JEWEL_USDT_GARDEN_ADDR)) {
-            quest = result.find((quest) => quest.questAddress === JEWEL_USDT_GARDEN_ADDR)
-            timer = ((quest.completeAtTime.toNumber() - Date.now() / 1000) / 60).toFixed(2)
-            if (parseInt(timer) < 0) {
-                console.log(`[${(new Date(Date.now())).toGMTString()}] Klaytn Garden Quest ended ${parseInt(timer) * (-1)} minutes ago`)
-                completeQuest(quest.heroes[0], wallet)
-            } else if (parseInt(timer) > 0) {
-                console.log(`[${(new Date(Date.now())).toGMTString()}] Klaytn Garden Quest: Active and ending in ${timer} minutes`)
-            }
-        } else {
-            console.log(`[${(new Date(Date.now())).toGMTString()}] Klaytn Garden Quest: Jewel USDT Garden Quest is not active`)
+            console.log(`[${(new Date(Date.now())).toGMTString()}] DFK Gardening Quest: Quest is not active`)
             findGardeners().then(
                 (gardeners) => {
                     if(gardeners === null) {
-                        console.log(`[${(new Date(Date.now())).toGMTString()}] Klaytn Garden Quest: No gardeners ready to start a quest`)
+                        console.log(`[${(new Date(Date.now())).toGMTString()}] DFK Gardening Quest: No gardeners ready to start a quest`)
                         return
                     }
-                    startQuest('Klaytn Garden', JEWEL_USDT_GARDEN_ADDR, wallet, 20, gardeners)
+                    startQuest('DFK Gardening', CRYSTAL_BTC_ADDRESS, wallet, 20, gardeners)
                 }
             )
         }

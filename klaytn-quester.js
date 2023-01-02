@@ -48,27 +48,6 @@ const main = async () => {
             )
         }
 
-        if (result.some((quest) => quest.questAddress === JEWEL_USDT_GARDEN_ADDR)) {
-            quest = result.find((quest) => quest.questAddress === JEWEL_USDT_GARDEN_ADDR)
-            timer = ((quest.completeAtTime.toNumber() - Date.now() / 1000) / 60).toFixed(2)
-            if (parseInt(timer) < 0) {
-                console.log(`[${(new Date(Date.now())).toGMTString()}] Klaytn Garden Quest ended ${parseInt(timer) * (-1)} minutes ago`)
-                completeQuest(quest.heroes[0], wallet)
-            } else if (parseInt(timer) > 0) {
-                console.log(`[${(new Date(Date.now())).toGMTString()}] Klaytn Garden Quest: Active and ending in ${timer} minutes`)
-            }
-        } else {
-            console.log(`[${(new Date(Date.now())).toGMTString()}] Klaytn Garden Quest: Jewel USDT Garden Quest is not active`)
-            findGardeners().then(
-                (gardeners) => {
-                    if(gardeners === null) {
-                        console.log(`[${(new Date(Date.now())).toGMTString()}] Klaytn Garden Quest: No gardeners ready to start a quest`)
-                        return
-                    }
-                    startQuest('Klaytn Garden', JEWEL_USDT_GARDEN_ADDR, wallet, 20, gardeners)
-                }
-            )
-        }
     })
 }
 
