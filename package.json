@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "pm2-runtime index.js --attach"
+    "start": "pm2 start index.js && pm2 attach 0"
   },
   "keywords": [],
   "author": "",
