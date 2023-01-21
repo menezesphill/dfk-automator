@@ -26,24 +26,24 @@ const main = async () => {
         // check if results has an element 'questAddress' with value JADE_MINING_ADDR
         // if yes print 'Jade Mining Quest is active'
         // if no print 'Jade Mining Quest is not active'
-        if (result.some((quest) => quest.questAddress === JADE_MINING_ADDR)) {
-            quest = result.find((quest) => quest.questAddress === JADE_MINING_ADDR)
+        if (result.some((quest) => quest.questAddress === JADE_USDT_GARDEN_ADDR)) {
+            quest = result.find((quest) => quest.questAddress === JADE_USDT_GARDEN_ADDR)
             timer = ((quest.completeAtTime.toNumber() - Date.now() / 1000) / 60).toFixed(2)
             if (parseInt(timer) < 0) {
-                console.log(`[${(new Date(Date.now())).toGMTString()}] Jade Mining Quest ended ${parseInt(timer) * (-1)} minutes ago`)
+                console.log(`[${(new Date(Date.now())).toGMTString()}] Gardening Quest ended ${parseInt(timer) * (-1)} minutes ago`)
                 completeQuest(quest.heroes[0], wallet)
             } else if (parseInt(timer) > 0) {
-                console.log(`[${(new Date(Date.now())).toGMTString()}] Jade Mining Quest: Active and ending in ${timer} minutes`)
+                console.log(`[${(new Date(Date.now())).toGMTString()}] Gardening Quest: Active and ending in ${timer} minutes`)
             }
         } else {
-            console.log(`[${(new Date(Date.now())).toGMTString()}] Jade Mining Quest: Jade Mining Quest is not active`)
-            findMiners().then(
-                (miners) => {
-                    if(miners === null) {
-                        console.log(`[${(new Date(Date.now())).toGMTString()}] Jade Mining Quest: No miners ready to start a quest`)
+            console.log(`[${(new Date(Date.now())).toGMTString()}] Gardening Quest: Jade Mining Quest is not active`)
+            findGardeners().then(
+                (gardeners) => {
+                    if(gardeners === null) {
+                        console.log(`[${(new Date(Date.now())).toGMTString()}] Gardening Quest: No garneders ready to start a quest`)
                         return
                     }
-                    startQuest('Jade Mining', JADE_MINING_ADDR, wallet, 15, miners)
+                    startQuest('Gardening Quest', JADE_USDT_GARDEN_ADDR, wallet, 25, gardeners)
                 }
             )
         }
