@@ -5,7 +5,7 @@ const readline = require("readline");
 const provider = new ethers.providers.JsonRpcProvider("https://klaytn.rpc.defikingdoms.com/")
 const abi = require('./abi/QuestCoreV2.2.json')
 
-const contractAddress = "0x8dc58d6327E1f65b18B82EDFb01A361f3AAEf624"
+const contractAddress = "0x1Ac6Cd893EDdb6Cac15E5A9FC549335b8b449015"
 const JADE_MINING_ADDR = "0x20B274262FA6da57B5Ff90498EC373c0266eF901"
 const JEWEL_USDT_GARDEN_ADDR = "0x0831f733870e847263907F32B3367De2f47CeAf0"
 const JADE_USDT_GARDEN_ADDR = "0x177D9F3A92630CB8C46F169b1F99a12A7a326c45"
@@ -26,8 +26,8 @@ const main = async () => {
         // check if results has an element 'questAddress' with value JADE_MINING_ADDR
         // if yes print 'Jade Mining Quest is active'
         // if no print 'Jade Mining Quest is not active'
-        if (result.some((quest) => quest.questAddress === JADE_MINING_ADDR)) {
-            quest = result.find((quest) => quest.questAddress === JADE_MINING_ADDR)
+        if (result.some((quest) => quest.questInstanceId == 4)) {
+            quest = result.find((quest) => quest.questInstanceId == 4)
             timer = ((quest.completeAtTime.toNumber() - Date.now() / 1000) / 60).toFixed(2)
             if (parseInt(timer) < 0) {
                 console.log(`[${(new Date(Date.now())).toGMTString()}] Jade Mining Quest ended ${parseInt(timer) * (-1)} minutes ago`)
@@ -258,9 +258,10 @@ const startQuest = async (quest, questAddr, wallet, attempts, questingGroup) => 
                     .connect(wallet)
                     .startQuest(
                         questingGroup,
-                        questAddr,
+                        4,
                         attempts,
                         0,
+			4,
                         { gasPrice: 30000000000, gasLimit: 5000000 }
                     ),
             2
