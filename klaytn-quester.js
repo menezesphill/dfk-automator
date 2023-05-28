@@ -6,9 +6,6 @@ const provider = new ethers.providers.JsonRpcProvider("https://klaytn.rpc.defiki
 const abi = require('./abi/QuestCoreV2.2.json')
 
 const contractAddress = "0x1Ac6Cd893EDdb6Cac15E5A9FC549335b8b449015"
-const JADE_MINING_ADDR = "0x20B274262FA6da57B5Ff90498EC373c0266eF901"
-const JEWEL_USDT_GARDEN_ADDR = "0x0831f733870e847263907F32B3367De2f47CeAf0"
-const JADE_USDT_GARDEN_ADDR = "0x177D9F3A92630CB8C46F169b1F99a12A7a326c45"
 const QuestCoreV2 = new ethers.Contract(contractAddress, abi, provider)
 let wallet;
 
@@ -43,7 +40,7 @@ const main = async () => {
                         console.log(`[${(new Date(Date.now())).toGMTString()}] Jade Mining Quest: No miners ready to start a quest`)
                         return
                     }
-                    startQuest('Jade Mining', JADE_MINING_ADDR, wallet, 15, miners)
+                    startQuest('Jade Mining', wallet, 15, miners)
                 }
             )
         }
@@ -249,7 +246,7 @@ const promptForInput = async (prompt, promptFor) => {
     }
 }
 
-const startQuest = async (quest, questAddr, wallet, attempts, questingGroup) => {
+const startQuest = async (quest, wallet, attempts, questingGroup) => {
     try {
         console.log(`[${(new Date(Date.now())).toGMTString()}] Starting quest ${quest}`);
         await tryTransaction(
